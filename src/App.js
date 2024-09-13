@@ -4,6 +4,8 @@ import WeatherCard from './components/WeatherCard';
 import SearchBar from './components/SearchBar';
 import ToggleButton from './components/ToggleButton';
 import ForecastCard from './components/ForecastCard';
+import { toast } from 'react-toastify'; // Import react-toastify
+
 import './App.css'
 
 function App() {
@@ -42,7 +44,8 @@ function App() {
       localStorage.setItem('city', city);
       localStorage.setItem('weatherData', JSON.stringify(response.data));
     } catch (error) {
-      alert('City not found or an error occurred!');
+      console.log(error.response.data.message,"errrrrrrrrrrrr");
+      toast.error('error.response.data.message');
     }
   };
 
@@ -53,7 +56,8 @@ function App() {
       setForecastData(uniqueDaysForecast);
       localStorage.setItem('forecastData', JSON.stringify(uniqueDaysForecast));
     } catch (error) {
-      alert('Error fetching forecast!');
+      console.log(error.response.data.message,"errrrrrrrrrrrr");
+      toast.error('error.response.data.message');
     }
   };
 

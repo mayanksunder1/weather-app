@@ -1,20 +1,25 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import WeatherCard from './components/WeatherCard';
-import SearchBar from './components/SearchBar';
+import CitySearch from './components/CitySearch'; // Import the CitySearch component
 import ToggleButton from './components/ToggleButton';
 import ForecastCard from './components/ForecastCard';
-import { toast } from 'react-toastify'; // Import react-toastify
-
-import './App.css'
+import { ToastContainer, toast } from 'react-toastify';
+import clearsky from "./utills/images/clear-sky.jpg";
+import cloudysky from "./utills/images/cloudy-sky.webp";
+import rain from "./utills/images/rain.jpg";
+import snow from "./utills/images/snow.webp";
+import thunderstorm from "./utills/images/thunderstorm.jpg";
+import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [forecastData, setForecastData] = useState([]);
   const [city, setCity] = useState('New York');
   const [unit, setUnit] = useState('metric');
+  const [background, setBackground] = useState('');
   const apiKey = '29f686dcbb9da4b059a29393b2a19031';
-
 
   useEffect(() => {
     const cachedCity = localStorage.getItem('city');
@@ -29,7 +34,6 @@ function App() {
       fetchWeatherData(city);
       fetchForecastData(city);
     }
-
   }, []);
 
   useEffect(() => {
@@ -43,9 +47,28 @@ function App() {
       setWeatherData(response.data);
       localStorage.setItem('city', city);
       localStorage.setItem('weatherData', JSON.stringify(response.data));
+      const mainWeather = response.data.weather[0].main.toLowerCase();
+      switch (mainWeather) {
+        case 'clear':
+            setBackground(clearsky);
+            break;
+        case 'clouds':
+            setBackground(cloudysky);
+            break;
+        case 'rain':
+            setBackground(rain);
+            break;
+        case 'snow':
+            setBackground(snow);
+            break;
+        case 'thunderstorm':
+            setBackground(thunderstorm);
+            break;
+        default:
+            setBackground(clearsky);
+      }
     } catch (error) {
-      console.log(error.response.data.message,"errrrrrrrrrrrr");
-      toast.error('error.response.data.message');
+      toast.error(error.response.data.message);
     }
   };
 
@@ -56,8 +79,7 @@ function App() {
       setForecastData(uniqueDaysForecast);
       localStorage.setItem('forecastData', JSON.stringify(uniqueDaysForecast));
     } catch (error) {
-      console.log(error.response.data.message,"errrrrrrrrrrrr");
-      toast.error('error.response.data.message');
+      toast.error(error.response.data.message);
     }
   };
 
@@ -76,16 +98,20 @@ function App() {
     setCity(newCity);
   };
 
+  const handleError = (message) => {
+    toast.error(message);
+  };
+
   const toggleUnit = () => {
     setUnit(unit === 'metric' ? 'imperial' : 'metric');
   };
 
   return (
-    <div className="App">
-      <h1>Weather Forecast</h1>
-      <SearchBar onSearch={handleSearch} />
+    <div className="App" style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover' }}>
+      <ToastContainer />
+      <h1 style={{ color: 'white', paddingTop: '1rem' }}>Weather Forecast</h1>
+      <CitySearch onSearch={handleSearch} onError={handleError} /> {/* Pass handleError to CitySearch */}
       <ToggleButton toggleUnit={toggleUnit} unit={unit} />
-
       {weatherData && <WeatherCard data={weatherData} />}
       <div className="forecast-container">
         {forecastData.length > 0 && forecastData.map((day, index) => (

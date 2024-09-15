@@ -5,14 +5,23 @@ body {
   font-family: 'Arial', sans-serif;
   background-color: #f0f8ff; /* Light blue background */
 }
-
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+ }
 
 /* App container */
 .App {
   text-align: center;
-  padding: 20px;
-  max-width: 1200px;
-  margin: auto;
+  /* padding: 20px; */
+  /* max-width: 1200px; */
+  /* margin: auto; */
+  object-fit: contain;
+  background-size: contain;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 /* Title styling */
@@ -139,4 +148,132 @@ h1 {
     width: 15%;
     padding: 10px;
   }
+}
+
+
+.weather-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.weather-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.main-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.temp-icon {
+  display: flex;
+  align-items: center;
+}
+
+.temp-icon h2 {
+  margin-left: 10px;
+  font-size: 2.5em;
+}
+
+.realfeel {
+  text-align: right;
+}
+
+.weather-description {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.details div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.details span {
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .weather-card {
+      padding: 15px;
+  }
+
+  .main-info {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .realfeel {
+      text-align: left;
+      margin-top: 10px;
+  }
+
+  .details {
+      grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.city-search-input {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.city-suggestions-dropdown {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  background: white;
+}
+
+.city-suggestions-dropdown li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.city-suggestions-dropdown li:hover {
+  background-color: #f0f0f0;
 }

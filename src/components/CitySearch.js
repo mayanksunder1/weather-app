@@ -78,6 +78,7 @@ const CitySearch = ({ onSearch, onError }) => {
         </ul>
       )}
     </div>
+    
   );
 };
 

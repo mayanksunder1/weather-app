@@ -33,7 +33,7 @@ const CitySearch = ({ onSearch, onError }) => {
     setLoading(true);
     
       const response = await axios.get(
-        `http://api.openweathermap.org/data/2.5/find?q=${cityName}&type=like&appid=29f686dcbb9da4b059a29393b2a19031`
+        `https://api.openweathermap.org/data/2.5/find?q=${cityName}&type=like&appid=29f686dcbb9da4b059a29393b2a19031`
       );
       const cityNames = response.data.list.map((city) => city.name);
       console.log(cityNames);

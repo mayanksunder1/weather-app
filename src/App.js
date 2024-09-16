@@ -107,7 +107,7 @@ function App() {
   };
 
   return (
-    <div className="App" style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover' }}>
+    <div className="App weather-background" style={{ backgroundImage: `url(${background})`}}>
       <ToastContainer />
       <h1 style={{ color: 'white', paddingTop: '1rem' }}>Weather Forecast</h1>
       <CitySearch onSearch={handleSearch} onError={handleError} /> {/* Pass handleError to CitySearch */}

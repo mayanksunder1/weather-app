@@ -218,7 +218,7 @@ h1 {
 
 @media (max-width: 600px) {
   .weather-card {
-      padding: 15px;
+      padding: 10px;
   }
 
   .main-info {
@@ -232,7 +232,9 @@ h1 {
   }
 
   .details {
+    font-size: 0.5rem;
     grid-template-columns: repeat(2, 1fr);
+    line-height: 1rem;
   }
 }
 
@@ -243,8 +245,21 @@ h1 {
 
 
 
-
-
+@media (max-width: 768px) {
+  .weather-background {
+    background-size: contain; 
+    height: auto;
+  }
+}
+.weather-background {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 
 
